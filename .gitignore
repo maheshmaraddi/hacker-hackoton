@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.DS_Store
+*.zip
+support_tickets_extracted/
+sample_support_corpus.csv
+support_tickets.csv
+log.txt
+.venv/
+venv/
+env/

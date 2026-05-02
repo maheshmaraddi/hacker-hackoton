@@ -1,0 +1,27 @@
+Submission Note for HackerRank Verification
+
+Project: Terminal-based Multi-Domain Support Triage Agent
+
+Files included:
+- triage_agent.py   : CLI triage tool
+- run_tests.py      : simple test runner (validates columns and non-empty responses)
+- README.md         : usage & verification steps
+- CHECKLIST.md      : submission checklist
+- sample_support_corpus.csv : sample corpus used for grounding
+- support_tickets_extracted/support_tickets/support_tickets.csv : input tickets
+
+Behavior summary:
+- Terminal-based; run `python triage_agent.py --corpus <corpus.csv> --tickets <tickets.csv> --out <out.csv>`
+- Uses only the provided corpus for retrieval and grounding; responses are snippets from matched articles plus citation.
+- Escalates cases when: sensitive keywords are detected (billing, fraud, account access, identity), or when top retrieval score is below the `--confidence-threshold` (default 0.12).
+- The `--confidence-threshold` CLI flag is provided so reviewers can adjust sensitivity depending on corpus size.
+
+Verification performed:
+- Ran `run_tests.py` which runs the agent on sample tickets and asserts required output columns and at least one non-empty response.
+- Generated `support_tickets_extracted/support_tickets/final_triaged.csv` and `final_triaged_v2.csv` (if present) showing triage decisions with citations.
+
+Notes for reviewers:
+- The agent intentionally escalates low-confidence cases to avoid hallucination when the corpus is small. If you provide a larger, domain-specific corpus, lower the `--confidence-threshold` to reduce escalations.
+- To reproduce: install requirements, run `python run_tests.py`, then run the agent on the full tickets file.
+
+Contact: Provided in submission metadata.
